@@ -79,6 +79,33 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/fundingManagement',
+    component: Layout,
+    hidden:false,
+    redirect: '/fundingManagement/fundingApproval',
+    name: '资助管理',
+    meta: {
+      title: '资助管理',
+      icon: 'nested'
+    },
+    children: [
+      {
+        path: 'fundingApproval',
+        component: () => import('@/views/fundingManagement/fundingApproval/index'), // Parent router-view
+        //redirect: '/fundingManagement/fundingApproval/applicationDetails',
+        name: '资助审批',
+        meta: { title: '资助审批' },
+      },
+      {
+        path: 'fundingApproval/applicationDetails',
+        hidden:true,
+        component: () => import('@/views/fundingManagement/fundingApproval/componentsPage/applicationDetails'), // Parent router-viewement
+        name: '申请资助详情',
+        meta: { title: '申请资助详情' },
+      },
+    ]
+  },
+  {
     path: '/configuration',
     component: Layout,
     redirect: '/configuration/awardSetting',

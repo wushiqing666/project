@@ -6,7 +6,7 @@
         <el-form
         :inline="true"
         :model="form"
-        label-width="100px"
+        label-width="120px"
         class="search-form"
       > 
       <el-row class="basicSearch">
