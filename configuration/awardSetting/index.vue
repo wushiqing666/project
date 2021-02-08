@@ -6,7 +6,7 @@
         <template slot="confirmButton">
           <div style="float: right;margin-right:20px">
             <el-button type="primary" @click="awardAdd">添加奖项</el-button>
-            <el-button  @click="handleCreate">编辑</el-button>
+            <el-button  @click="awardAdd">编辑</el-button>
             <el-button type="danger" @click="batchDelete()">删除</el-button>
           </div>
         </template>
@@ -20,7 +20,10 @@
         style="width: 100%"
         height='500'
         size="medium"
+        border
+        @selection-change="handleSelectionChange"
       >
+        <el-table-column type="selection" width="60" />
         <el-table-column
           type="index"
           label="序号"
@@ -82,12 +85,6 @@
         @pagination="fetchData"
       />
     </el-card>
-    <el-drawer
-      title="我是标题"
-      :visible.sync="show"
-      :with-header="false">
-      <span>{{detailsText}}</span>
-    </el-drawer>
   </div>
 </template>
 
@@ -125,7 +122,8 @@ export default {
       total: 0,
       drawer:false,
       detailsText:'',
-      show:false
+      show:false,
+      multipleSelection:[]
     };
   },
   created() {
@@ -134,12 +132,50 @@ export default {
   methods: {
     onReset(formName){
     },
+    // 多选操作
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
     awardAdd(){
       this.$router.push({path:'/configuration/awardAdd'})
     },
     showDetails(value){
       this.show=true
       this.detailsText=value
+    },
+    // 删除数据
+    handleDelete(index, row) {
+      console.log(index, row);
+      this.$confirm("确定删除选择的数据吗", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          // 此处可添加--删除接口
+          // 删除成功调用fetchData方法更新列表
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除",
+          });
+        });
+    },
+    // 批量删除
+    batchDelete() {
+      if (this.multipleSelection.length < 1) {
+        this.$message({
+          message: "请先选择要删除的数据！",
+          type: "warning",
+        });
+      } else {
+        this.handleDelete();
+      }
     },
     // 获取数据列表
     fetchData() {

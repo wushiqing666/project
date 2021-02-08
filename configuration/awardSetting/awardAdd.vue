@@ -5,91 +5,153 @@
         <span>奖项添加</span>
       </div>
       <div class="main-content basic-info">
-        <div class="infoTitle1">奖项设置</div>
         <div class="info-details">
+            
             <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="230px" class="form-list">
-        <el-form-item label="输入框（长度限制）：" prop="inputLimit">
-          <el-input v-model="ruleForm.inputLimit" maxlength="15" show-word-limit placeholder="请输入" />
-        </el-form-item>
-        <el-form-item label="纯数字（纯数字）：" prop="inputNum">
-          <el-input v-model.number="ruleForm.inputNum" maxlength="11" placeholder="请输入数字" />
-        </el-form-item>
-        <el-form-item label="输入框（密码隐藏）：" prop="password">
-          <el-input v-model="ruleForm.password" placeholder="请输入密码" maxlength="16" show-password />
-        </el-form-item>
-        <el-form-item label="日期和时间选择器：" required>
-          <el-col :span="11">
-            <el-form-item prop="dateVal">
-              <el-date-picker v-model="ruleForm.dateVal" type="date" placeholder="选择日期" style="width: 100%;" />
-            </el-form-item>
-          </el-col>
-          <el-col class="line" :span="2">-</el-col>
-          <el-col :span="11">
-            <el-form-item prop="timeVal">
-              <el-time-picker v-model="ruleForm.timeVal" placeholder="选择时间" style="width: 100%;" />
-            </el-form-item>
-          </el-col>
-        </el-form-item>
-        <el-form-item label="switch开关（隐藏下面表单）：" prop="switch">
-          <el-switch v-model="ruleForm.switch" />
-        </el-form-item>
-        <div v-if="ruleForm.switch">
-          <el-form-item label="滑块条（初始值）：" prop="slider">
-            <el-slider v-model="ruleForm.slider" />
-          </el-form-item>
-          <el-form-item label="级联选择器（自定义）：">
-            <el-col :span="10">
-              <el-form-item prop="cascader1">
-                <el-cascader v-model="ruleForm.cascader1" :options="cascaderData" :props="{ expandTrigger: 'hover' }">
-                  <template slot-scope="{ node, data }">
-                    <span>{{ data.label }}</span>
-                    <span v-if="!node.isLeaf">({{ data.children.length }})</span>
-                  </template>
-                </el-cascader>
-              </el-form-item>
-            </el-col>
-            <el-col class="tip-title" :span="4">（懒加载）</el-col>
-          </el-form-item>
-          <el-form-item label="单选框（带禁止）：" prop="radio">
-            <el-radio-group v-model="ruleForm.radio">
-              <el-radio label="免费" />
-              <el-radio label="收费" />
-              <el-radio label="赞助" />
-              <el-radio label="线上" disabled />
-              <el-radio label="线下" disabled />
-            </el-radio-group>
-          </el-form-item>
-          <el-form-item label="多选框（带禁止）：" prop="checkbox">
-            <el-checkbox-group v-model="ruleForm.checkbox">
-              <el-checkbox label="游泳" />
-              <el-checkbox label="跑步" />
-              <el-checkbox label="健身" />
-              <el-checkbox label="阅读" />
-              <el-checkbox label="电影" disabled />
-              <el-checkbox label="音乐" disabled />
-            </el-checkbox-group>
-          </el-form-item>
-          <el-form-item label="文本域（长度限制）：" prop="content">
-            <el-input
-              v-model="ruleForm.content"
-              type="textarea"
-              :autosize="{ minRows: 3, maxRows: 5 }"
-              placeholder="请输入内容"
-              maxlength="50"
-              show-word-limit
-            />
-          </el-form-item>
+                <div class="infoTitle1">奖项设置</div>
+                <el-form-item label="是否启用 ：" prop="switch">
+                <el-switch v-model="ruleForm.switch" />
+                </el-form-item>
+                <el-form-item label="奖项名称 ：" prop="inputLimit">
+                <el-input v-model="ruleForm.inputLimit" maxlength="15" show-word-limit placeholder="请输入" />
+                </el-form-item>
+                <el-form-item label="年度：" prop="inputLimit">
+                    <el-select v-model="ruleForm.inputLimit" placeholder="请选择年度">
+                    <el-option label="2.5年" value="2.5年"/>
+                    <el-option label="3年" value="3年"/>
+                    <el-option label="4年" value="4年"/>
+                    <el-option label="5年" value="5年"/>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="资助类型：" prop="inputLimit">
+                    <el-select v-model="ruleForm.inputLimit" placeholder="请选择资助类型">
+                    <el-option label="2.5年" value="2.5年"/>
+                    <el-option label="3年" value="3年"/>
+                    <el-option label="4年" value="4年"/>
+                    <el-option label="5年" value="5年"/>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="发放形式：" prop="inputLimit">
+                    <el-select v-model="ruleForm.inputLimit" placeholder="请选择发放形式">
+                    <el-option label="2.5年" value="2.5年"/>
+                    <el-option label="3年" value="3年"/>
+                    <el-option label="4年" value="4年"/>
+                    <el-option label="5年" value="5年"/>
+                    </el-select>
+                </el-form-item>
+                <el-row>
+                <el-col :span="14">
+                    <el-form-item style="width:40%" label="是否学术科技奖项：" prop="switch">
+                <el-switch v-model="ruleForm.switch" />
+                </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                <el-form-item style="width:40%" label="是否团体奖项：" prop="switch">
+                    <el-switch v-model="ruleForm.switch" />
+                    </el-form-item>
+                </el-col>
+                </el-row>
+                
+                <el-form-item label="申请有效期：" required>
+                <el-col :span="11">
+                    <el-form-item prop="dateVal">
+                    <el-date-picker v-model="ruleForm.dateVal" type="date" placeholder="选择日期" style="width: 100%;" />
+                    </el-form-item>
+                </el-col>
+                <el-col class="line" :span="2">-</el-col>
+                <el-col :span="11">
+                    <el-form-item prop="timeVal">
+                    <el-date-picker v-model="ruleForm.dateVal" type="date" placeholder="选择日期" style="width: 100%;" />
+                    </el-form-item>
+                </el-col>
+                </el-form-item>
+                <el-form-item label="社会审核人：" prop="inputLimit">
+                    <el-select v-model="ruleForm.inputLimit" placeholder="请选择社会审核人">
+                    <el-option label="2.5年" value="2.5年"/>
+                    <el-option label="3年" value="3年"/>
+                    <el-option label="4年" value="4年"/>
+                    <el-option label="5年" value="5年"/>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="奖项金额：" prop="switch">
+                    <el-input v-model.number="ruleForm.inputNum" maxlength="11" placeholder="请输入奖项金额" />
+                </el-form-item>
+                <div class="infoTitle1">奖项描述</div>
+                <el-form-item label="奖项描述(图片)：" prop="switch">
+                    <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePreview">
+                    <i class="el-icon-plus" />
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl">
+                    </el-dialog>
+                </el-form-item>
+                <el-form-item label="奖项描述(文字)：">
+                    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+                </el-form-item>
+                
+                <div class="infoTitle1">申请限制</div>
+                <el-form-item label="年级限制：" prop="switch">
+                   <el-switch v-model="ruleForm.switch" />
+                   <div>勾选是才展开下面的选项，选中后的项目才可申请奖金</div>
+                   <el-checkbox-group v-model="ruleForm.type">
+                    <el-checkbox label="大一" name="大一"></el-checkbox>
+                    <el-checkbox label="大二" name="大二"></el-checkbox>
+                    <el-checkbox label="大三" name="大三"></el-checkbox>
+                    <el-checkbox label="大四" name="大四"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="贫困等级限制：" prop="switch">
+                   <el-switch v-model="ruleForm.switch" />
+                   <div>勾选是才展开下面的选项，选中后的项目才可申请奖金</div>
+                   <el-checkbox-group v-model="ruleForm.type">
+                    <el-checkbox label="特别贫困" name="特别贫困"></el-checkbox>
+                    <el-checkbox label="贫困" name="贫困"></el-checkbox>
+                    <el-checkbox label="一般贫困" name="一般贫困"></el-checkbox>
+                    <el-checkbox label="不贫困" name="不贫困"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="院系限制：" prop="switch">
+                   <el-switch v-model="ruleForm.switch" />
+                   <div>勾选是才展开下面的选项，选中后的项目才可申请奖金</div>
+                   <el-checkbox-group v-model="ruleForm.type">
+                    <el-checkbox label="化学系" name="化学系"></el-checkbox>
+                    <el-checkbox label="物理系" name="物理系"></el-checkbox>
+                    <el-checkbox label="电子系" name="电子系"></el-checkbox>
+                    <el-checkbox label="生物系" name="生物系"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="专业限制：" prop="switch">
+                   <el-switch v-model="ruleForm.switch" />
+                   <div>勾选是才展开下面的选项，选中后的项目才可申请奖金</div>
+                   <el-checkbox-group v-model="ruleForm.type">
+                    <el-checkbox label="专业一" name="专业一"></el-checkbox>
+                    <el-checkbox label="专业二" name="专业二"></el-checkbox>
+                    <el-checkbox label="专业三" name="专业三"></el-checkbox>
+                    <el-checkbox label="专业四" name="专业四"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="攻读学历限制：" prop="switch">
+                   <el-switch v-model="ruleForm.switch" />
+                   <div>勾选是才展开下面的选项，选中后的项目才可申请奖金</div>
+                   <el-checkbox-group v-model="ruleForm.type">
+                    <el-checkbox label="专科" name="专科"></el-checkbox>
+                    <el-checkbox label="本科" name="本科"></el-checkbox>
+                    <el-checkbox label="研究生" name="研究生"></el-checkbox>
+                    </el-checkbox-group>
+                </el-form-item>
+                <el-form-item label="不及格课程不超过：" prop="inputLimit">
+                <el-input v-model="ruleForm.inputLimit" maxlength="15" show-word-limit placeholder="请输入" />
+                </el-form-item>
+                <el-form-item label="班级排名(%)：" prop="inputLimit">
+                <el-input v-model="ruleForm.inputLimit" maxlength="15" show-word-limit placeholder="请输入" />
+                </el-form-item>
+                <el-form-item>
+                    <el-button type="primary">确认</el-button>
+                    <el-button>取消</el-button>
+                    <el-button @click="backTo" type="primary">返回</el-button>
+                </el-form-item>
+            </el-form>
         </div>
-        <el-form-item class="submit-box">
-          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
-        </el-form-item>
-      </el-form>
-        </div>
-      </div>
-      <div class="main-content funding-history">
-        <div class="infoTitle1">资助历史</div>
-
       </div>
       <!-- <div class="back">
           <el-button @click="backTo" type="primary">返回</el-button>
@@ -113,6 +175,7 @@ export default {
                 timeVal: '',
                 switch: true,
                 slider: 32,
+                type: [],
                 cascader1: [],
                 cascader2: [],
                 radio: '线下',
@@ -144,7 +207,9 @@ export default {
                 timeVal: [
                 { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
                 ]
-            }
+            },
+            dialogImageUrl: '',
+      dialogVisible: false,
     
         }
     },
@@ -162,6 +227,10 @@ export default {
           return false
         }
       })
+    },
+    handlePreview(file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
@@ -233,6 +302,32 @@ export default {
             bottom: 10px;
             text-align: center;
         }
+    }
+    .form-list-wrapper {
+  .el-card {
+    padding-top: 20px;
+  }
+
+}
+  }
+    .form-list {
+    .el-rate {
+      line-height: 2;
+    }
+    > .el-form-item {
+      margin-bottom: 22px;
+      .line {
+        text-align: center;
+      }
+      .tip-title {
+        text-align: right;
+        color: #606266;
+      }
+    }
+    .submit-box {
+      margin-top: 35px;
+      margin-left: 0;
+      text-align: center;
     }
   }
 </style>
